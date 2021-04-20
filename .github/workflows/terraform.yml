@@ -24,8 +24,9 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
+    - name: check out repo
+      uses: actions/checkout@v2
+    - name: set up Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
@@ -36,9 +37,11 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v1
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+    - name: set up Terraform
+      uses: hashicorp/setup-terraform@v1
+    # - name: 'Deploy to Azure WebApp'
+    #   uses: azure/webapps-deploy@v1
+    #   with:
+    #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
+    #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+    #     package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
