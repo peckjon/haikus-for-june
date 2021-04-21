@@ -1,1 +1,1 @@
-require '@peckjon'
+require 'peckjon'
