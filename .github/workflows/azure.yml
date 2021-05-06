@@ -10,9 +10,9 @@
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
 on:
   workflow_dispatch:
-#   push:
-#     branches:
-#       - master
+  push:
+    branches:
+      - master
 
 env:
   AZURE_WEBAPP_NAME: peckjon-haikus   # set this to your application's name
