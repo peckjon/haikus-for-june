@@ -1,0 +1,5 @@
+name: test-azure-stack-template
+description: This is a stack for deploying a test app to Azure
+branding:
+  icon: 'Azure.svg'
+  color: 'blue'
