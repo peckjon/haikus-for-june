@@ -11,4 +11,9 @@ app.get('/', (req, res) => {
   res.render('index', {haikus: haikus});
 });
 
-app.listen(port);
+app.listen(port, () => {
+
+  //print hikus to console
+  console.log(haikus);
+
+});
