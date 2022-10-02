@@ -17,3 +17,13 @@ app.listen(port, () => {
   console.log(haikus);
 
 });
+
+//get a random haiku
+function getRandomHaiku() {
+  return haikus[Math.floor(Math.random() * haikus.length)];
+}
+
+//render a random haiku
+app.get('/random', (req, res) => {
+  res.render('random', {haiku: getRandomHaiku()});
+});
