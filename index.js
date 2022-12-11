@@ -17,3 +17,19 @@ app.listen(port, () => {
   console.log(haikus);
 
 });
+
+//get haiku by id
+app.get('/:id', (req, res) => {
+  res.render('index', {haikus: [haikus[req.params.id]]});
+});
+
+//get haiku by POST request
+app.post('/', (req, res) => {
+  res.render('index', {haikus: [haikus[req.body.id]]});
+});
+
+//redirect to haiku by POST request (vulnerable)
+app.post('/redirect', (req, res) => {
+  //redirect to haiku
+  res.redirect('/' + req.body.id);
+});
