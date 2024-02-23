@@ -33,3 +33,11 @@ app.post('/redirect', (req, res) => {
   //redirect to haiku
   res.redirect('/' + req.body.id);
 });
+
+// get a random haiku by POST request
+app.post('/random', (req, res) => {
+  //get random haiku
+  let randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
+  //render random haiku
+  res.render('index', {haikus: [randomHaiku]});
+});
