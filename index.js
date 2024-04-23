@@ -33,3 +33,12 @@ app.post('/redirect', (req, res) => {
   //redirect to haiku
   res.redirect('/' + req.body.id);
 });
+
+// Add a new GET route `/random` to serve a random haiku
+app.get('/random', (req, res) => {
+  // Use `Math.random()` to select a random haiku from `haikus.json`
+  const randomIndex = Math.floor(Math.random() * haikus.length);
+  const randomHaiku = haikus[randomIndex];
+  // Render the selected haiku using `views/random.ejs`
+  res.render('random', {haikus: [randomHaiku]});
+});
