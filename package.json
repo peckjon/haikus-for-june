@@ -12,7 +12,9 @@
     "dependencies": {
         "ejs": "^3.0.1",
         "express": "^4.17.1",
-        "nodemon": "^2.0.2"
+        "nodemon": "^2.0.2",
+        "@azure/msal-node": "^1.0.0",
+        "@azure/msal-express-middleware": "^1.0.0"
     },
     "devDependencies": {
         "gulp": "^4.0.2",
