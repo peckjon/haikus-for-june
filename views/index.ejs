@@ -11,6 +11,16 @@
   <body>
     <h1>Haikus for June</h1>
     <div>
+      <% if (user) { %>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/auth/github">Login with GitHub</a>
+      <% } %>
+    </div>
+    <div>
+      <a href="/random">View a random haiku</a>
+    </div>
+    <div>
       <% for(var i=0; i < haikus.length; i++) { %>
         <img
           class="june-images"

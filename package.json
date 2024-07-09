@@ -12,7 +12,10 @@
     "dependencies": {
         "ejs": "^3.0.1",
         "express": "^4.17.1",
-        "nodemon": "^2.0.2"
+        "nodemon": "^2.0.2",
+        "passport": "^0.4.1",
+        "passport-github": "^1.1.0",
+        "express-session": "^1.17.1"
     },
     "devDependencies": {
         "gulp": "^4.0.2",
