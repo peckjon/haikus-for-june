@@ -13,15 +13,31 @@ body {
     max-width: 400px;
     max-height: 400px;
     border: 8px solid #fff;
+    position: relative;
 }
 
 .haiku-containers {
     padding: 10px 0px 20px 0px;
+    position: relative;
 }
 
 .haikus {
     font-size: 18px;
     white-space: pre-wrap;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.june-images:hover .haikus {
+    opacity: 1;
 }
 
 @media only screen and (max-width: 600px) {
