@@ -24,6 +24,21 @@ body {
     white-space: pre-wrap;
 }
 
+.haiku-caption {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: blue;
+    display: none;
+}
+
+.june-images:hover + .haiku-caption {
+    display: block;
+}
+
 @media only screen and (max-width: 600px) {
     .june-images {
         max-width: 340px;
