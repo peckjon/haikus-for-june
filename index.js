@@ -11,25 +11,22 @@ app.get('/', (req, res) => {
   res.render('index', {haikus: haikus});
 });
 
-app.listen(port, () => {
-
-  //print hikus to console
-  console.log(haikus);
-
-});
-
 //get haiku by id
 app.get('/:id', (req, res) => {
-  res.render('index', {haikus: [haikus[req.params.id]]});
+  const haiku = haikus[req.params.id];
+  if (haiku) {
+    res.render('index', {haikus: [haiku]});
+  } else {
+    res.status(404).send('Haiku not found');
+  }
 });
 
-//get haiku by POST request
-app.post('/', (req, res) => {
-  res.render('index', {haikus: [haikus[req.body.id]]});
-});
+// Export the app
+module.exports = app;
 
-//redirect to haiku by POST request (vulnerable)
-app.post('/redirect', (req, res) => {
-  //redirect to haiku
-  res.redirect('/' + req.body.id);
-});
+// Start the server only if this file is run directly
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}

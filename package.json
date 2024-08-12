@@ -7,7 +7,8 @@
     "author": "Microsoft",
     "scripts": {
         "start": "node index.js",
-        "dev": "nodemon"
+        "dev": "nodemon",
+        "test": "jest"
     },
     "dependencies": {
         "ejs": "^3.0.1",
@@ -16,6 +17,8 @@
     },
     "devDependencies": {
         "gulp": "^4.0.2",
-        "gulp-imagemin": "^7.1.0"
+        "gulp-imagemin": "^7.1.0",
+        "jest": "^29.7.0",
+        "supertest": "^7.0.0"
     }
 }
