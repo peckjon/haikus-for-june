@@ -8,7 +8,7 @@
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon",
-        "test": "jest"
+        "test": "jest --watch"
     },
     "dependencies": {
         "ejs": "^3.0.1",
