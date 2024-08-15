@@ -17,7 +17,7 @@ app.get('/:id', (req, res) => {
   if (haiku) {
     res.render('index', {haikus: [haiku]});
   } else {
-    res.status(404).send('Haiku not found');
+    res.status(401).send('Haiku not found');
   }
 });
 
