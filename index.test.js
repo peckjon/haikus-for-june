@@ -1,15 +1,15 @@
-// index.test.js
 const request = require('supertest');
 const express = require('express');
 const app = require('./index');
 const haikus = require('./haikus.json');
 
 describe('GET /', () => {
-  it('should return HTML with all haikus', async () => {
+  it('should return HTML with all haikus in reverse order', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
     expect(response.headers['content-type']).toMatch(/html/);
-    haikus.forEach(haiku => {
+    const reversedHaikus = [...haikus].reverse();
+    reversedHaikus.forEach(haiku => {
       expect(response.text).toContain(haiku.text);
       expect(response.text).toContain(haiku.image);
     });
