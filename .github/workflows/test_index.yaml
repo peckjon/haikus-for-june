@@ -2,7 +2,6 @@ name: test index.js
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
