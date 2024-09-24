@@ -28,7 +28,7 @@ jobs:
       run: npm install
 
     - name: Run tests
-      run: npm testnowatch
+      run: npm test
 
     - name: Set status to success
       if: success()

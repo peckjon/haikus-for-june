@@ -8,8 +8,8 @@
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon",
-        "test": "jest --watch",
-        "testnowatch": "jest",
+        "test": "jest",
+        "testwatch": "jest --watch",
         "coverage": "jest --coverage"
     },
     "dependencies": {
