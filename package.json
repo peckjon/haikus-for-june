@@ -14,11 +14,11 @@
     },
     "dependencies": {
         "ejs": "^3.0.1",
-        "express": "^4.17.1"
+        "express": "^4.21.0"
     },
     "devDependencies": {
         "gulp": "^5.0.0",
-        "gulp-imagemin": "^6.2.0",
+        "gulp-imagemin": "^2.4.0",
         "jest": "^29.7.0",
         "nodemon": "^3.1.4",
         "supertest": "^7.0.0"
