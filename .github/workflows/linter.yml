@@ -10,8 +10,8 @@ name: Lint Code Base
 # Start the job on all push #
 #############################
 on:
-  push:
-    branches-ignore: [main]
+  # push:
+  #   branches-ignore: [main]
     # Remove the line above to run when pushing to main
   pull_request:
     branches: [main]
