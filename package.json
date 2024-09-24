@@ -9,6 +9,7 @@
         "start": "node index.js",
         "dev": "nodemon",
         "test": "jest --watch",
+        "testnowatch": "jest",
         "coverage": "jest --coverage"
     },
     "dependencies": {
