@@ -69,7 +69,7 @@ jobs:
     - name: Run coverage
       run: npm run coverage
 
-    - name: Pipe coverage output to PR if this is a PR
+    - name: Pipe coverage output to PR
       run: |
         COVERAGE_OUTPUT=$(npm run coverage)
         ESCAPED_OUTPUT=$(echo "$COVERAGE_OUTPUT" | jq -Rsa .)
