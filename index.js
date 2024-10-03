@@ -21,6 +21,23 @@ app.get('/:id', (req, res) => {
   }
 });
 
+//get random subset of haikus
+app.get('/random', (req, res) => {
+  const subsetSize = Math.floor(Math.random() * haikus.length) + 1;
+  const randomSubset = [];
+  const usedIndices = new Set();
+
+  while (randomSubset.length < subsetSize) {
+    const randomIndex = Math.floor(Math.random() * haikus.length);
+    if (!usedIndices.has(randomIndex)) {
+      randomSubset.push(haikus[randomIndex]);
+      usedIndices.add(randomIndex);
+    }
+  }
+
+  res.render('index', {haikus: randomSubset});
+});
+
 // Export the app
 module.exports = app;
 

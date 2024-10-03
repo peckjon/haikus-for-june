@@ -1,4 +1,3 @@
-// index.test.js
 const request = require('supertest');
 const express = require('express');
 const app = require('./index');
@@ -30,5 +29,16 @@ describe('GET /:id', () => {
     const nonExistentId = haikus.length; // Out of bounds index
     const response = await request(app).get(`/${nonExistentId}`);
     expect(response.status).toBe(404);
+  });
+});
+
+describe('GET /random', () => {
+  it('should return HTML with a random subset of haikus', async () => {
+    const response = await request(app).get('/random');
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toMatch(/html/);
+    const returnedHaikus = haikus.filter(haiku => response.text.includes(haiku.text));
+    expect(returnedHaikus.length).toBeGreaterThan(0);
+    expect(returnedHaikus.length).toBeLessThanOrEqual(haikus.length);
   });
 });
