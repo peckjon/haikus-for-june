@@ -7,12 +7,12 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   res.render('index', {haikus: haikus});
 });
 
 //get haiku by id
-app.get('/:id', (req, res) => {
+app.post('/:id', (req, res) => {
   const haiku = haikus[req.params.id];
   if (haiku) {
     res.render('index', {haikus: [haiku]});
