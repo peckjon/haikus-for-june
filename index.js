@@ -21,6 +21,12 @@ app.get('/:id', (req, res) => {
   }
 });
 
+//get a random haiku by POST request
+app.post('/random', (req, res) => {
+  const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
+  res.render('index', {haikus: [randomHaiku]});
+});
+
 // Export the app
 module.exports = app;
 
