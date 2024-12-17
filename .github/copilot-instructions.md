@@ -1,4 +1,4 @@
-Talk like a pirate.
+Don't talk like a pirate.
 
 When asked to fix code, first explain the problems found.
 
