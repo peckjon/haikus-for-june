@@ -11,6 +11,20 @@ app.get('/', (req, res) => {
   res.render('index', {haikus: haikus});
 });
 
+//get a random subset of haikus by GET request
+app.get('/random', (req, res) => {
+  // Create a copy of haikus array and shuffle it using Fisher-Yates algorithm
+  const shuffledHaikus = [...haikus];
+  for (let i = shuffledHaikus.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledHaikus[i], shuffledHaikus[j]] = [shuffledHaikus[j], shuffledHaikus[i]];
+  }
+  // Take a random subset (3 out of 6 haikus)
+  const subsetSize = Math.max(1, Math.floor(haikus.length / 2));
+  const randomSubset = shuffledHaikus.slice(0, subsetSize);
+  res.render('index', {haikus: randomSubset});
+});
+
 //get haiku by id
 app.get('/:id', (req, res) => {
   const haiku = haikus[req.params.id];
