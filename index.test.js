@@ -14,6 +14,14 @@ describe('GET /', () => {
       expect(response.text).toContain(haiku.image);
     });
   });
+
+  it('should contain hover overlay structure', async () => {
+    const response = await request(app).get('/');
+    expect(response.status).toBe(200);
+    expect(response.text).toContain('class="image-container"');
+    expect(response.text).toContain('class="haiku-overlay"');
+    expect(response.text).toContain('class="haiku-text"');
+  });
 });
 
 describe('GET /:id', () => {

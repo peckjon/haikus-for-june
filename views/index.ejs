@@ -12,14 +12,13 @@
     <h1>Haikus for June</h1>
     <div>
       <% for(var i=0; i < haikus.length; i++) { %>
-        <img
-          class="june-images"
-          src="images/<%= haikus[i].image %>" />
-        <div 
-          class="haiku-containers">
-          <p 
-            class="haikus"
-          ><%- haikus[i].text %></p>
+        <div class="image-container">
+          <img
+            class="june-images"
+            src="images/<%= haikus[i].image %>" />
+          <div class="haiku-overlay">
+            <p class="haiku-text"><%- haikus[i].text %></p>
+          </div>
         </div>
       <% } %>
     </div>
