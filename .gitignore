@@ -38,3 +38,6 @@ jspm_packages
 
 # ignore mac system files
 .DS_Store
+
+# SQLite database files
+*.db
