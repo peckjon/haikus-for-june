@@ -11,6 +11,14 @@
   <body>
     <h1>Haikus for June</h1>
     <div>
+      <a href="https://github.com/login/oauth/authorize?client_id=your_client_id&redirect_uri=http://localhost:3000/auth/github/callback&scope=user:email" class="github-login-btn">
+        Login with GitHub
+      </a>
+      <a href="/random" class="random-haiku-btn">
+        Random Haiku
+      </a>
+    </div>
+    <div>
       <% for(var i=0; i < haikus.length; i++) { %>
         <img
           class="june-images"

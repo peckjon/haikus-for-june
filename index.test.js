@@ -14,6 +14,20 @@ describe('GET /', () => {
       expect(response.text).toContain(haiku.image);
     });
   });
+
+  it('should include GitHub login button', async () => {
+    const response = await request(app).get('/');
+    expect(response.status).toBe(200);
+    expect(response.text).toContain('Login with GitHub');
+    expect(response.text).toContain('github.com/login/oauth/authorize');
+  });
+
+  it('should include Random Haiku button', async () => {
+    const response = await request(app).get('/');
+    expect(response.status).toBe(200);
+    expect(response.text).toContain('Random Haiku');
+    expect(response.text).toContain('href="/random"');
+  });
 });
 
 describe('GET /:id', () => {
@@ -30,5 +44,22 @@ describe('GET /:id', () => {
     const nonExistentId = haikus.length; // Out of bounds index
     const response = await request(app).get(`/${nonExistentId}`);
     expect(response.status).toBe(404);
+  });
+});
+
+describe('GET /random', () => {
+  it('should return HTML with a single random haiku', async () => {
+    const response = await request(app).get('/random');
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toMatch(/html/);
+    
+    // Check that the response contains one of the haikus
+    let foundHaiku = false;
+    haikus.forEach(haiku => {
+      if (response.text.includes(haiku.text) && response.text.includes(haiku.image)) {
+        foundHaiku = true;
+      }
+    });
+    expect(foundHaiku).toBe(true);
   });
 });

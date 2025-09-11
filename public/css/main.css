@@ -24,6 +24,39 @@ body {
     white-space: pre-wrap;
 }
 
+.github-login-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    border: 2px solid #fff;
+    transition: background-color 0.3s ease;
+}
+
+.github-login-btn:hover {
+    background-color: #555;
+}
+
+.random-haiku-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2d5aa0;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 2px solid #fff;
+    transition: background-color 0.3s ease;
+}
+
+.random-haiku-btn:hover {
+    background-color: #1e3d6f;
+}
+
 @media only screen and (max-width: 600px) {
     .june-images {
         max-width: 340px;
