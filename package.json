@@ -10,11 +10,13 @@
         "dev": "nodemon",
         "test": "jest",
         "testwatch": "jest --watch",
-        "coverage": "jest --coverage"
+        "coverage": "jest --coverage",
+        "migrate": "node migrate.js"
     },
     "dependencies": {
         "ejs": "^3.0.1",
-        "express": "^4.21.0"
+        "express": "^4.21.0",
+        "sqlite3": "^5.1.7"
     },
     "devDependencies": {
         "gulp": "^5.0.0",
