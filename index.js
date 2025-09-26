@@ -9,22 +9,16 @@ const dbPath = process.env.NODE_ENV === 'test'
   ? './database/test_haikus.db' 
   : './database/haikus.db';
 const db = new Database(dbPath);
-let dbInitialized = false;
 
-// Initialize database on startup
-async function initializeDatabase() {
-  if (!dbInitialized) {
-    await db.init();
-    dbInitialized = true;
-  }
-}
+// Initialize database once
+let initPromise = db.init();
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
 app.get('/', async (req, res) => {
   try {
-    await initializeDatabase();
+    await initPromise; // Ensure database is initialized
     const haikus = await db.getAllHaikus();
     res.render('index', {haikus: haikus});
   } catch (error) {
@@ -36,7 +30,7 @@ app.get('/', async (req, res) => {
 //get haiku by id
 app.get('/:id', async (req, res) => {
   try {
-    await initializeDatabase();
+    await initPromise; // Ensure database is initialized
     const haiku = await db.getHaikuById(parseInt(req.params.id, 10));
     if (haiku) {
       res.render('index', {haikus: [haiku]});
@@ -52,7 +46,7 @@ app.get('/:id', async (req, res) => {
 //get a random haiku by POST request
 app.post('/random', async (req, res) => {
   try {
-    await initializeDatabase();
+    await initPromise; // Ensure database is initialized
     const randomHaiku = await db.getRandomHaiku();
     if (randomHaiku) {
       res.render('index', {haikus: [randomHaiku]});
@@ -84,7 +78,7 @@ process.on('SIGTERM', async () => {
 // Start the server only if this file is run directly
 if (require.main === module) {
   app.listen(port, async () => {
-    await initializeDatabase();
+    await initPromise;
     console.log(`Server is running on port ${port}`);
   });
 }

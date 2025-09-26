@@ -22,7 +22,8 @@ async function migrate() {
     for (const haiku of haikus) {
       await db.insertHaiku(haiku.text, haiku.image);
       migrated++;
-      console.log(`Migrated haiku ${migrated}/${haikus.length}: "${haiku.text.substring(0, 30)}..."`);
+      const textPreview = haiku.text ? haiku.text.substring(0, 30) : 'No text';
+      console.log(`Migrated haiku ${migrated}/${haikus.length}: "${textPreview}..."`);
     }
     
     console.log(`Successfully migrated ${migrated} haikus to SQLite!`);

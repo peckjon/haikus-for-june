@@ -29,15 +29,26 @@ class Database {
   async createTables() {
     return new Promise((resolve, reject) => {
       const schemaPath = path.join(__dirname, 'schema.sql');
-      const schema = fs.readFileSync(schemaPath, 'utf8');
       
-      this.db.exec(schema, (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
+      // Check if schema file exists
+      if (!fs.existsSync(schemaPath)) {
+        reject(new Error(`Schema file not found at ${schemaPath}`));
+        return;
+      }
+      
+      try {
+        const schema = fs.readFileSync(schemaPath, 'utf8');
+        
+        this.db.exec(schema, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      } catch (readError) {
+        reject(new Error(`Failed to read schema file: ${readError.message}`));
+      }
     });
   }
 
