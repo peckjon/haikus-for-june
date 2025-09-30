@@ -16,6 +16,26 @@ describe('GET /', () => {
   });
 });
 
+describe('GET /alpha', () => {
+  it('should return HTML with all haikus sorted alphabetically', async () => {
+    const response = await request(app).get('/alpha');
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toMatch(/html/);
+    
+    // Verify all haikus are present
+    haikus.forEach(haiku => {
+      expect(response.text).toContain(haiku.text);
+      expect(response.text).toContain(haiku.image);
+    });
+    
+    // Verify alphabetical order by checking the first haiku appears before the last
+    const sortedHaikus = [...haikus].sort((a, b) => a.text.localeCompare(b.text));
+    const firstHaikuIndex = response.text.indexOf(sortedHaikus[0].text);
+    const lastHaikuIndex = response.text.indexOf(sortedHaikus[sortedHaikus.length - 1].text);
+    expect(firstHaikuIndex).toBeLessThan(lastHaikuIndex);
+  });
+});
+
 describe('GET /:id', () => {
   it('should return HTML with the specific haiku', async () => {
     const haikuId = 0; // Assuming we have at least one haiku
