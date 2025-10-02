@@ -13,6 +13,7 @@
         "coverage": "jest --coverage"
     },
     "dependencies": {
+        "better-sqlite3": "^12.4.1",
         "ejs": "^3.0.1",
         "express": "^4.21.0"
     },
