@@ -4,17 +4,28 @@ const path = require('path');
 // Database file path
 const dbPath = path.join(__dirname, 'haikus.db');
 
-// Initialize database connection
-const db = new Database(dbPath);
+// Initialize database connection with error handling
+let db;
+try {
+  db = new Database(dbPath);
+} catch (error) {
+  console.error('Failed to initialize database:', error.message);
+  throw error;
+}
 
 // Create haikus table if it doesn't exist
-db.exec(`
-  CREATE TABLE IF NOT EXISTS haikus (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    text TEXT NOT NULL,
-    image TEXT NOT NULL
-  )
-`);
+try {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS haikus (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      text TEXT NOT NULL,
+      image TEXT NOT NULL
+    )
+  `);
+} catch (error) {
+  console.error('Failed to create haikus table:', error.message);
+  throw error;
+}
 
 // Database operations
 const getAllHaikus = () => {
@@ -47,6 +58,5 @@ module.exports = {
   getHaikuById,
   getRandomHaiku,
   insertHaiku,
-  getHaikuCount,
-  db
+  getHaikuCount
 };
