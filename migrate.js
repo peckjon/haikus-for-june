@@ -55,7 +55,14 @@ function migrate() {
       }
     });
 
-    const finalCount = getHaikuCount();
+    let finalCount;
+    try {
+      finalCount = getHaikuCount();
+    } catch (dbError) {
+      console.error('Error: Failed to get final count from database:', dbError.message);
+      return { success: false, successCount, failCount, error: 'Database query failed' };
+    }
+    
     console.log(`\nMigration complete! Database now contains ${finalCount} haiku(s).`);
     
     if (failCount > 0) {
