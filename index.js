@@ -18,17 +18,10 @@ app.get('/', (req, res) => {
 
 //get haiku by id
 app.get('/:id', (req, res) => {
-  // Support both 0-based (legacy) and 1-based (database) IDs
+  // Maintain 0-based indexing for backward compatibility with original JSON array
   const requestedId = parseInt(req.params.id);
-  let haiku;
-  
-  // Try as direct database ID first (1-based)
-  haiku = db.getHaikuById(requestedId);
-  
-  // If not found and it's a 0-based index, try adding 1
-  if (!haiku && requestedId >= 0) {
-    haiku = db.getHaikuById(requestedId + 1);
-  }
+  const dbId = requestedId + 1; // Convert 0-based index to 1-based database ID
+  const haiku = db.getHaikuById(dbId);
   
   if (haiku) {
     res.render('index', {haikus: [haiku]});

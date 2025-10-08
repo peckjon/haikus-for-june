@@ -18,7 +18,6 @@ function migrate() {
   console.log(`Migrating ${haikusData.length} haikus...`);
   haikusData.forEach((haiku, index) => {
     db.addHaiku(haiku.text, haiku.image);
-    console.log(`  Migrated haiku ${index + 1}: ${haiku.text.substring(0, 30)}...`);
   });
   
   console.log('Migration completed successfully!');
