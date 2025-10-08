@@ -42,6 +42,11 @@ describe('Database layer', () => {
       expect(haiku).toBeUndefined();
     });
 
+    it('should return undefined for invalid id (non-numeric)', () => {
+      const haiku = getHaikuById('invalid');
+      expect(haiku).toBeUndefined();
+    });
+
     it('should return correct haiku text for id 1', () => {
       const haiku = getHaikuById(1);
       expect(haiku.text).toContain('Pulling on my leash');

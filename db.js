@@ -1,11 +1,18 @@
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
 
 // Database file path
 const dbPath = path.join(__dirname, 'haikus.db');
 
 // Initialize database connection
-const db = new Database(dbPath);
+let db;
+try {
+  db = new Database(dbPath);
+} catch (error) {
+  console.error('Failed to initialize database:', error);
+  throw error;
+}
 
 // Create haikus table if it doesn't exist
 const createTable = () => {
@@ -26,8 +33,22 @@ const initializeDatabase = () => {
   // Check if table is already populated
   const count = db.prepare('SELECT COUNT(*) as count FROM haikus').get();
   if (count.count === 0) {
+    // Check if haikus.json exists
+    const haikusPath = path.join(__dirname, 'haikus.json');
+    if (!fs.existsSync(haikusPath)) {
+      console.error('haikus.json file not found. Cannot initialize database.');
+      return;
+    }
+    
     // Load haikus from JSON file
-    const haikus = require('./haikus.json');
+    let haikus;
+    try {
+      haikus = require('./haikus.json');
+    } catch (error) {
+      console.error('Failed to load haikus.json:', error);
+      return;
+    }
+    
     const insertStmt = db.prepare('INSERT INTO haikus (text, image) VALUES (?, ?)');
     
     // Insert all haikus
@@ -49,8 +70,13 @@ const getAllHaikus = () => {
 
 // Get haiku by ID
 const getHaikuById = (id) => {
+  // Validate that id is a valid integer
+  const numericId = parseInt(id, 10);
+  if (isNaN(numericId)) {
+    return undefined;
+  }
   const stmt = db.prepare('SELECT * FROM haikus WHERE id = ?');
-  return stmt.get(id);
+  return stmt.get(numericId);
 };
 
 // Get random haiku
@@ -78,6 +104,5 @@ module.exports = {
   getHaikuById,
   getRandomHaiku,
   getHaikusCount,
-  closeDatabase,
-  db // Export for testing purposes
+  closeDatabase
 };
