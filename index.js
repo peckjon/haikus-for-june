@@ -1,19 +1,28 @@
 let express = require('express');
 let app = express();
 let ejs = require('ejs');
-const haikus = require('./haikus.json');
+const db = require('./db');
+const { migrate } = require('./migrate');
 const port = process.env.PORT || 3000;
+
+// Run migration on startup if database is empty
+migrate();
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
+  const haikus = db.getAllHaikus();
   res.render('index', {haikus: haikus});
 });
 
 //get haiku by id
 app.get('/:id', (req, res) => {
-  const haiku = haikus[req.params.id];
+  // Maintain 0-based indexing for backward compatibility with original JSON array
+  const requestedId = parseInt(req.params.id);
+  const dbId = requestedId + 1; // Convert 0-based index to 1-based database ID
+  const haiku = db.getHaikuById(dbId);
+  
   if (haiku) {
     res.render('index', {haikus: [haiku]});
   } else {
@@ -23,7 +32,7 @@ app.get('/:id', (req, res) => {
 
 //get a random haiku by POST request
 app.post('/random', (req, res) => {
-  const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
+  const randomHaiku = db.getRandomHaiku();
   res.render('index', {haikus: [randomHaiku]});
 });
 
