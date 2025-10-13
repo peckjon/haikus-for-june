@@ -2,7 +2,7 @@
 
 This diagram shows the data flows between the Frontend (Browser/Client) and Backend (Express Server) in the Haikus for June application.
 
-## Data Flow Diagram
+## High-Level System Overview
 
 ```mermaid
 graph TB
