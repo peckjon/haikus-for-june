@@ -1,5 +1,5 @@
 ---
-name: Documentation Agent
+name: Documentation
 description: Build documentation according to our team standards
 ---
 
