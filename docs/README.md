@@ -76,9 +76,9 @@ open http://localhost:3000
 
 ### For Content Maintainers
 
-1. Add images to `/raw_images/`
-2. Run `gulp` to optimize images
-3. Update `haikus.json` with new entries
+1. Add images to `/raw_images/` (JPEG/PNG format, descriptive names like `june-park.jpg`)
+2. Run `gulp` to optimize images (outputs to `/public/images/`)
+3. Update `haikus.json` with new entries (text and image filename)
 4. Test locally with `npm start`
 5. Commit and push changes to deploy
 
