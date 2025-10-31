@@ -7,24 +7,24 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('index', {haikus: haikus});
-});
-
-//get haiku by id
-app.get('/:id', (req, res) => {
-  const haiku = haikus[req.params.id];
-  if (haiku) {
-    res.render('index', {haikus: [haiku]});
-  } else {
-    res.status(404).send('Haiku not found');
-  }
+app.post('/', (req, res) => {
+  res.status(201).render('index', {haikus: haikus});
 });
 
 //get a random haiku by POST request
 app.post('/random', (req, res) => {
   const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
-  res.render('index', {haikus: [randomHaiku]});
+  res.status(201).render('index', {haikus: [randomHaiku]});
+});
+
+//get haiku by id
+app.post('/:id', (req, res) => {
+  const haiku = haikus[req.params.id];
+  if (haiku) {
+    res.status(201).render('index', {haikus: [haiku]});
+  } else {
+    res.status(404).send('Haiku not found');
+  }
 });
 
 // Export the app
