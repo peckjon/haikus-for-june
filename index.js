@@ -11,6 +11,18 @@ app.get('/', (req, res) => {
   res.render('index', {haikus: haikus});
 });
 
+//get a random haiku by POST request
+app.post('/random', (req, res) => {
+  const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
+  res.render('index', {haikus: [randomHaiku]});
+});
+
+//get a random haiku by GET request
+app.get('/random', (req, res) => {
+  const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
+  res.render('index', {haikus: [randomHaiku]});
+});
+
 //get haiku by id
 app.get('/:id', (req, res) => {
   const haiku = haikus[req.params.id];
@@ -19,12 +31,6 @@ app.get('/:id', (req, res) => {
   } else {
     res.status(404).send('Haiku not found');
   }
-});
-
-//get a random haiku by POST request
-app.post('/random', (req, res) => {
-  const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
-  res.render('index', {haikus: [randomHaiku]});
 });
 
 // Export the app
