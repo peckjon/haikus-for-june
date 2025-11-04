@@ -11,6 +11,12 @@ app.get('/', (req, res) => {
   res.render('index', {haikus: haikus});
 });
 
+//get all haikus sorted alphabetically
+app.get('/alpha', (req, res) => {
+  const sortedHaikus = [...haikus].sort((a, b) => a.text.localeCompare(b.text));
+  res.render('index', {haikus: sortedHaikus});
+});
+
 //get haiku by id
 app.get('/:id', (req, res) => {
   const haiku = haikus[req.params.id];
