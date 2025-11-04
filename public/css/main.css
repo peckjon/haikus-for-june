@@ -9,10 +9,42 @@ body {
     text-align:center;
 }
 
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
 .june-images {
     max-width: 400px;
     max-height: 400px;
     border: 8px solid #fff;
+    display: block;
+}
+
+.haiku-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #0066ff;
+    font-weight: bold;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.image-container:hover .haiku-overlay {
+    opacity: 1;
+}
+
+.haiku-text {
+    margin: 0;
+    font-size: 16px;
+    white-space: pre-wrap;
+    text-align: center;
 }
 
 .haiku-containers {
@@ -28,6 +60,10 @@ body {
     .june-images {
         max-width: 340px;
         max-height: 340px;
+    }
+
+    .haiku-text {
+        font-size: 18px;
     }
 
     .haikus {
