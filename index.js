@@ -1,19 +1,20 @@
 let express = require('express');
 let app = express();
 let ejs = require('ejs');
-const haikus = require('./haikus.json');
+const { getAllHaikus, getHaikuById, getRandomHaiku } = require('./db');
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
+  const haikus = getAllHaikus();
   res.render('index', {haikus: haikus});
 });
 
 //get haiku by id
 app.get('/:id', (req, res) => {
-  const haiku = haikus[req.params.id];
+  const haiku = getHaikuById(req.params.id);
   if (haiku) {
     res.render('index', {haikus: [haiku]});
   } else {
@@ -23,7 +24,7 @@ app.get('/:id', (req, res) => {
 
 //get a random haiku by POST request
 app.post('/random', (req, res) => {
-  const randomHaiku = haikus[Math.floor(Math.random() * haikus.length)];
+  const randomHaiku = getRandomHaiku();
   res.render('index', {haikus: [randomHaiku]});
 });
 
