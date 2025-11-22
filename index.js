@@ -27,6 +27,14 @@ app.post('/random', (req, res) => {
   res.render('index', {haikus: [randomHaiku]});
 });
 
+//get a random subset of haikus
+app.get('/random-subset', (req, res) => {
+  const count = parseInt(req.query.count) || 3;
+  const shuffled = haikus.sort(() => 0.5 - Math.random());
+  const randomSubset = shuffled.slice(0, count);
+  res.render('index', {haikus: randomSubset});
+});
+
 // Export the app
 module.exports = app;
 
